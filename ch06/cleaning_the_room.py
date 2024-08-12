@@ -1,5 +1,27 @@
 # 2144 - cleaning the room
 # https://acm.timus.ru/problem.aspx?space=1&num=2144
+def is_sorted(box_list):
+    for j in range(len(box_list)):
+        max_size = 0
+        for k in range(len(box_list[j])):
+            size = box_list[j][k]
+            if size >= max_size:
+                max_size = size
+            else:  # size < maxSize
+                return False
+    return True
+
+
+def can_clean(box_list):
+    end_size = 0
+    for j in range(len(box_list)):
+        start_size = box_list[j][0]
+        if end_size > start_size:
+            return False
+        end_size = box_list[j][-1]
+    return True
+
+
 boxCount = input().strip()
 if not boxCount.isdigit():
     exit(f"not {boxCount} is digit")
@@ -17,7 +39,6 @@ for _ in range(boxCount):
     boxLength = int(boxLength)
     if not len(boxInfo) == boxLength + 1:
         exit(f"not {len(boxInfo)} == {boxLength + 1}")
-    maxSize = 0
     box = []
     for i in range(1, len(boxInfo)):
         if not boxInfo[i].isdigit():
@@ -25,25 +46,11 @@ for _ in range(boxCount):
         value = int(boxInfo[i])
         if not 1 <= value <= 10 ** 4:
             exit(f"not 1 <= {value} <= 10 ** 4")
-        if value >= maxSize:
-            maxSize = value
-        else:  # value < maxSize
-            print("NO")
-            exit()
         box.append(value)
-    box.sort()
     boxes.append(box)
 boxes.sort()
-endSize = 0
-canClean = True
-for i in range(len(boxes)):
-    startSize = boxes[i][0]
-    if endSize > startSize:
-        canClean = False
-        break
-    endSize = boxes[i][-1]
-if canClean:
+if is_sorted(boxes) and can_clean(boxes):
     print("YES")
-else:  # canClean == False
+else:  # not is_sorted() or not can_clean()
     print("NO")
 
