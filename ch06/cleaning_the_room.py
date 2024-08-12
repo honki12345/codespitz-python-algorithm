@@ -9,6 +9,8 @@ if not 1 <= boxCount <= 100:
 boxes = []
 for _ in range(boxCount):
     boxInfo = input().strip().split(" ")
+    if not len(boxInfo) > 0:
+        exit(f"not {len(boxInfo)} > 0")
     boxLength = boxInfo[0]
     if not boxLength.isdigit():
         exit(f"not {boxLength} is digit")
