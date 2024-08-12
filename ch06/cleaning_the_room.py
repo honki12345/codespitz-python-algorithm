@@ -13,12 +13,14 @@ def is_sorted(box_list):
 
 
 def can_clean(box_list):
+    box_list_copy = list(box_list)
+    box_list_copy.sort()
     end_size = 0
-    for j in range(len(box_list)):
-        start_size = box_list[j][0]
+    for j in range(len(box_list_copy)):
+        start_size = box_list_copy[j][0]
         if end_size > start_size:
             return False
-        end_size = box_list[j][-1]
+        end_size = box_list_copy[j][-1]
     return True
 
 
@@ -48,7 +50,6 @@ for _ in range(boxCount):
             exit(f"not 1 <= {value} <= 10 ** 4")
         box.append(value)
     boxes.append(box)
-boxes.sort()
 if is_sorted(boxes) and can_clean(boxes):
     print("YES")
 else:  # not is_sorted() or not can_clean()
