@@ -26,7 +26,8 @@ for _ in range(boxCount):
         if value >= maxSize:
             maxSize = value
         else:  # value < maxSize
-            exit(f"not {box}, {value} in order from left to right")
+            print("NO")
+            exit()
         box.append(value)
     box.sort()
     boxes.append(box)
